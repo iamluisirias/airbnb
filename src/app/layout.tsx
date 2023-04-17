@@ -1,30 +1,36 @@
-import { Nunito } from 'next/font/google'
+import { Nunito } from 'next/font/google';
 
-import './globals.css'
+import './globals.css';
 
 // Components
-import NavBar from './components/navbar/NavBar'
+import ClientOnly from './components/ClientOnly';
+import NavBar from './components/navbar/NavBar';
+import RegisterModal from './components/modals/RegisterModal';
+import ToasterProvider from './providers/ToasterProvider';
 
 export const metadata = {
   title: 'Airbnb',
   description: 'Airbnb clone',
-}
+};
 
-const font = Nunito({ subsets: ["latin"] })
+const font = Nunito({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={font.className}>
-        <NavBar />
+        <ClientOnly>
+          <ToasterProvider />
+          <RegisterModal />
+          <NavBar />
+        </ClientOnly>
 
         {children}
-        
-        </body>
+      </body>
     </html>
-  )
+  );
 }
