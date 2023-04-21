@@ -11,8 +11,8 @@ import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 
 // Custom hook
-import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 // Components
 import Modal from './Modal';
@@ -25,8 +25,8 @@ const LoginModal = () => {
   const router = useRouter();
 
   // custom hooks
-  const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
 
   // local state
   const [isLoading, setIsLoading] = useState(false);
@@ -57,6 +57,11 @@ const LoginModal = () => {
       }
     });
   };
+
+  const toggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className='flex flex-col gap-4'>
@@ -104,12 +109,12 @@ const LoginModal = () => {
 
       <div className='text-neutral-500 font-light text-center mt-4'>
         <div className='flex justify-center items-center gap-2'>
-          <div>Don&apos;t have an account?</div>
+          <div>First time using Airbnb?</div>
           <div
-            onClick={loginModal.onClose}
+            onClick={toggle}
             className='text-neutral-800 cursor-pointer hover:underline'
           >
-            Sign Up
+            Create an account
           </div>
         </div>
       </div>
