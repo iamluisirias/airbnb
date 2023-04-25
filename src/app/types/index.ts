@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { Listing, User } from '@prisma/client';
 
 // This type is created by omitting the date type attributes for strings (or null if they're optionals)
 // This is required because only plain objects can be passed to client components from server components (Date objects are not supported)
@@ -11,4 +11,8 @@ export type SafeUser = Omit<
   createdAt: string;
   updatedAt: string;
   emailVerified: string | null;
+};
+
+export type SafeListing = Omit<Listing, 'createdAt'> & {
+  createdAt: string;
 };
